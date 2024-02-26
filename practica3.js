@@ -16,25 +16,25 @@
 //   });
 // }
 
-async function getPlant(q) {
-  try {
-    const response = await fetch(`http://trefle.io/api/v1/plants/search?token=VldyjaIcaB83LyYTcMQuBBIe0YfvefwNoDYkfQdfhr0&q=${q}`);
-    // if (!response.ok) {
-    //   throw new Error('La solicitud a la API falló');
-    // }
-    const json = await response.json();
+// async function getPlant(q) {
+//   try {
+//     const response = await fetch(`http://trefle.io/api/v1/plants/search?token=VldyjaIcaB83LyYTcMQuBBIe0YfvefwNoDYkfQdfhr0&q=${q}`);
+//     // if (!response.ok) {
+//     //   throw new Error('La solicitud a la API falló');
+//     // }
+//     const json = await response.json();
 
-    if (json.data && json.data.length > 0) {
-      const plant = json.data[0];
-      document.getElementById("output").innerHTML = `<br><br><h1>${plant.common_name} - ${plant.scientific_name}</h1><br><img src='${plant.image_url}' /><br>Descubierto en el año: ${plant.year} por: ${plant.author}`;
-    } else {
-      document.getElementById("output").innerHTML = "No se encontraron resultados.";
-    }
-  } catch (error) {
-    console.error("Error en la solicitud:", error);
-    document.getElementById("output").innerHTML = "Se produjo un error al cargar los datos.";
-  }
-}
+//     if (json.data && json.data.length > 0) {
+//       const plant = json.data[0];
+//       document.getElementById("output").innerHTML = `<br><br><h1>${plant.common_name} - ${plant.scientific_name}</h1><br><img src='${plant.image_url}' /><br>Descubierto en el año: ${plant.year} por: ${plant.author}`;
+//     } else {
+//       document.getElementById("output").innerHTML = "No se encontraron resultados.";
+//     }
+//   } catch (error) {
+//     console.error("Error en la solicitud:", error);
+//     document.getElementById("output").innerHTML = "Se produjo un error al cargar los datos.";
+//   }
+// }
 
 function getPlant(q){
   $.ajax({
