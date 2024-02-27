@@ -11,7 +11,9 @@ async function getPlant(q) {
 
     if (nestedData.data && nestedData.data.length > 0) {
       const plant = nestedData.data[0];
-      document.getElementById("output").innerHTML = `<br><br><h1>${plant.common_name} - ${plant.scientific_name}</h1><br><img src='${plant.image_url}' /><br>Descubierto en el año: ${plant.year} por: ${plant.author}`;
+      document.getElementById("output").innerHTML = `<br><br><h1>${plant.common_name} - ${plant.scientific_name}</h1>
+      <br>Descubierto en el año: ${plant.year} por: ${plant.author}<br><img src='${plant.image_url}' />`;
+
     } else {
       document.getElementById("output").innerHTML = "No se encontraron resultados.";
     }
