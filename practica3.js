@@ -1,48 +1,48 @@
 async function getPlant(q) {
   try {
-      const apiKey = "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"; // Replace with your actual API key
-      const apiUrl = "https://openrouter.ai/api/v1/chat/completions";
+      const apiKey = "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"; // Replace with your actual API key
+      const apiUrl = "https://api.openai.com/v1/chat/completions";
 
-      const response = await fetch(apiUrl, {
-          method: "POST",
-          headers: {
-              "Authorization": `Bearer ${apiKey}`,
-              "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-              "model": "google/gemini-2.0-pro-exp-02-05:free",
-              "messages": [
-                  { "role": "user", "content": `Give me a plant related short answer in spanish to the question: "${q}". Format the response in aesthetic HTML with clear headings (<h2>), subheadings (<h3>), and lists (<ul>) where appropriate, but do NOT include any code blocks, markdown formatting, or backticks.` }
-                  // { "role": "user", "content": `Give me a plant related very short answer in spanish to the question: "${q}". Format the response in HTML` }
-                ],
-              "top_p": 1,
-              "temperature": 0.7
-          })
-      });
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "model": "gpt-4o-mini",
+        "messages": [
+          { 
+            "role": "user", 
+            "content": `Dame una respuesta breve en español sobre plantas a la pregunta: "${q}". 
+                        Formatea la respuesta en HTML estético con títulos (<h2>), subtítulos (<h3>), 
+                        listas (<ul>).`
+          }
+        ],
+        "temperature": 0.7
+      })
+    });
 
-      if (!response.ok) {
-          throw new Error(`API request failed with status ${response.status}`);
-      }
+    if (!response.ok) {
+      throw new Error(`API request failed with status ${response.status}`);
+    }
 
-      const json = await response.json();
-      console.log("API Response:", json);
+    const json = await response.json();
+    console.log("API Response:", json);
 
-      if (json.choices && json.choices.length > 0) {
-          let plantInfo = json.choices[0].message.content; 
-          plantInfo = plantInfo.replace(/^```html\s*/, "");
-          plantInfo = plantInfo.replace(/```$/, "");
-          // Displaying the response
-          document.getElementById("output").innerHTML = plantInfo;
-      } else {
-          document.getElementById("output").innerHTML = "No se encontraron resultados.";
-      }
+    if (json.choices && json.choices.length > 0) {
+      let plantInfo = json.choices[0].message.content;
+      plantInfo = plantInfo.replace("```html", "").replace("```", "").trim(); // Clean unwanted formatting
 
+      document.getElementById("output").innerHTML = plantInfo;
+    } else {
+      document.getElementById("output").innerHTML = "No se encontraron resultados.";
+    }
   } catch (error) {
-      console.error("Error en la solicitud:", error);
-      document.getElementById("output").innerHTML = "Se produjo un error al cargar los datos.";
+    console.error("Error en la solicitud:", error);
+    document.getElementById("output").innerHTML = "Se produjo un error al cargar los datos.";
   }
 }
-
 
 function validateUser(email, pass) {
   if (email.length!=0 && pass.length!=0 && email.includes('@')){
