@@ -1,6 +1,6 @@
 async function getPlant(q) {
   try {
-      const apiKey = "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"; // Replace with your actual API key
+      const apiKey = "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"; // Replace with your actual API key
       const apiUrl = "https://openrouter.ai/api/v1/chat/completions";
 
       const response = await fetch(apiUrl, {
