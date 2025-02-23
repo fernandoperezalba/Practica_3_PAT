@@ -1,6 +1,6 @@
 async function getPlant(q) {
   try {
-      const apiKey = "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"; // Replace with your actual API key
+      const apiKey = "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"; // Replace with your actual API key
       const apiUrl = "https://openrouter.ai/api/v1/chat/completions";
 
       const response = await fetch(apiUrl, {
@@ -10,7 +10,7 @@ async function getPlant(q) {
               "Content-Type": "application/json",
           },
           body: JSON.stringify({
-              "model": "mistralai/mistral-small-24b-instruct-2501:free",
+              "model": "google/gemini-2.0-pro-exp-02-05:free",
               "messages": [
                   { "role": "user", "content": `Give me a plant related short answer in spanish to the question: "${q}". Format the response in aesthetic HTML with clear headings (<h2>), subheadings (<h3>), and lists (<ul>) where appropriate, but do NOT include any code blocks, markdown formatting, or backticks.` }
                   // { "role": "user", "content": `Give me a plant related very short answer in spanish to the question: "${q}". Format the response in HTML` }
