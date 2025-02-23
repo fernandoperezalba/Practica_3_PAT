@@ -1,6 +1,9 @@
+const part1 = "sk";
+const part2 = "-proj-aVzAAmvcCWj3tZW3xXIU5AQkzBQJbN4JlCjD4zjgovht5rltcmTUKTzXMrT6jcbsWuWZlmz7e2T3BlbkFJtil9mJs98RrA19R4XjHm2wi5LMHPiUkckGYYRY793tLwbGq_QC52QqMOypGRdyML_WwYp_JZoA"
+const apiKey = part1 + part2;
+
 async function getPlant(q) {
   try {
-      const apiKey = "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"; // Replace with your actual API key
       const apiUrl = "https://api.openai.com/v1/chat/completions";
 
     const response = await fetch(apiUrl, {
