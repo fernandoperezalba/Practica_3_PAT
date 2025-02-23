@@ -1,5 +1,5 @@
 const part1 = "sk";
-const part2 = "-proj-aVzAAmvcCWj3tZW3xXIU5AQkzBQJbN4JlCjD4zjgovht5rltcmTUKTzXMrT6jcbsWuWZlmz7e2T3BlbkFJtil9mJs98RrA19R4XjHm2wi5LMHPiUkckGYYRY793tLwbGq_QC52QqMOypGRdyML_WwYp_JZoA"
+const part2 = "-or-v1-c78e0d085066450011e45847e308179dad0a565ba43788b3d17d91d5033843b5"
 const apiKey = part1 + part2;
 
 async function getPlant(q) {
