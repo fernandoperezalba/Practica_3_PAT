@@ -3,19 +3,19 @@ const part2 = "-or-v1-c78e0d085066450011e45847e308179dad0a565ba43788b3d17d91d503
 const apiKey = part1 + part2;
 
 async function getPlant(q) {
-   try {
+  try {
       const apiUrl = "https://openrouter.ai/api/v1/chat/completions";
 
       const response = await fetch(apiUrl, {
           method: "POST",
           headers: {
-              "Authorization": Bearer ${apiKey},
+              "Authorization": `Bearer ${apiKey}`,
               "Content-Type": "application/json",
           },
           body: JSON.stringify({
-              "model": "google/gemini-2.0-pro-exp-02-05:free",
+              "model": "cognitivecomputations/dolphin3.0-r1-mistral-24b:free",
               "messages": [
-                  { "role": "user", "content": Give me a plant related short answer in spanish to the question: "${q}". Format the response in aesthetic HTML with clear headings (<h2>), subheadings (<h3>), and lists (<ul>) where appropriate, but do NOT include any code blocks, markdown formatting, or backticks. }
+                  { "role": "user", "content": `Give me a plant related short answer in spanish to the question: "${q}". Format the response in aesthetic HTML with clear headings (<h2>), subheadings (<h3>), and lists (<ul>) where appropriate, but do NOT include any code blocks, markdown formatting, or backticks.` }
                 ],
               "top_p": 1,
               "temperature": 0.7
@@ -23,7 +23,7 @@ async function getPlant(q) {
       });
 
       if (!response.ok) {
-          throw new Error(API request failed with status ${response.status});
+          throw new Error(`API request failed with status ${response.status}`);
       }
 
       const json = await response.json();
@@ -31,8 +31,8 @@ async function getPlant(q) {
 
       if (json.choices && json.choices.length > 0) {
           let plantInfo = json.choices[0].message.content; 
-          plantInfo = plantInfo.replace(/^html\s*/, "");
-          plantInfo = plantInfo.replace(/$/, "");
+          plantInfo = plantInfo.replace(/^```html\s*/, "");
+          plantInfo = plantInfo.replace(/```$/, "");
           // Displaying the response
           document.getElementById("output").innerHTML = plantInfo;
       } else {
