@@ -1,25 +1,45 @@
 async function getPlant(q) {
   try {
-    const proxyUrl = 'https://api.allorigins.win/get?url='
-    const apiUrl = 'https://trefle.io/api/v1/plants/search?token=VldyjaIcaB83LyYTcMQuBBIe0YfvefwNoDYkfQdfhr0&q=' + q
-    const response = await fetch(proxyUrl + encodeURIComponent(apiUrl))
-    if (!response.ok) {
-      throw new Error('La solicitud a la API falló');
-    }
-    const json = await response.json();
-    const nestedData = JSON.parse(json.contents)
+      const apiKey = "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"; // Replace with your actual API key
+      const apiUrl = "https://openrouter.ai/api/v1/chat/completions";
 
-    if (nestedData.data && nestedData.data.length > 0) {
-      const plant = nestedData.data[0];
-      document.getElementById("output").innerHTML = `<br><br><h1>${plant.common_name} - ${plant.scientific_name}</h1>
-      <br>Descubierto en el año: ${plant.year} por: ${plant.author}<br><img src='${plant.image_url}' />`;
+      const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+              "Authorization": `Bearer ${apiKey}`,
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+              "model": "cognitivecomputations/dolphin3.0-r1-mistral-24b:free",
+              "messages": [
+                  { "role": "user", "content": `Give me a plant related short answer in spanish to the question: "${q}". Format the response in aesthetic HTML with clear headings (<h2>), subheadings (<h3>), and lists (<ul>) where appropriate, but do NOT include any code blocks, markdown formatting, or backticks.` }
+                  // { "role": "user", "content": `Give me a plant related very short answer in spanish to the question: "${q}". Format the response in HTML` }
+                ],
+              "top_p": 1,
+              "temperature": 0.7
+          })
+      });
 
-    } else {
-      document.getElementById("output").innerHTML = "No se encontraron resultados.";
-    }
+      if (!response.ok) {
+          throw new Error(`API request failed with status ${response.status}`);
+      }
+
+      const json = await response.json();
+      console.log("API Response:", json);
+
+      if (json.choices && json.choices.length > 0) {
+          let plantInfo = json.choices[0].message.content; 
+          plantInfo = plantInfo.replace(/^```html\s*/, "");
+          plantInfo = plantInfo.replace(/```$/, "");
+          // Displaying the response
+          document.getElementById("output").innerHTML = plantInfo;
+      } else {
+          document.getElementById("output").innerHTML = "No se encontraron resultados.";
+      }
+
   } catch (error) {
-    console.error("Error en la solicitud:", error);
-    document.getElementById("output").innerHTML = "Se produjo un error al cargar los datos.";
+      console.error("Error en la solicitud:", error);
+      document.getElementById("output").innerHTML = "Se produjo un error al cargar los datos.";
   }
 }
 
