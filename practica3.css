@@ -101,3 +101,17 @@
 	flex-direction: row-reverse;
 	margin-right: 50px;
 }
+
+#output {
+    max-width: 80%;  /* Keeps it within 80% of the page width */
+    max-height: 400px; /* Limits height to 400px */
+    overflow-y: auto;  /* Enables vertical scrolling */
+    overflow-x: hidden; /* Hides horizontal scrolling */
+    padding: 15px;
+    background-color: #dfffe3;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+    white-space: normal; /* Ensures text wraps correctly */
+    line-height: 1.6;
+    margin: 20px auto; /* Centers the box */
+}
