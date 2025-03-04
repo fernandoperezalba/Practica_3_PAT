@@ -15,7 +15,10 @@ async function getPlant(q) {
           body: JSON.stringify({
               "model": "cognitivecomputations/dolphin3.0-r1-mistral-24b:free",
               "messages": [
-                  { "role": "user", "content": `Give me a plant related short answer in spanish to the question: "${q}". Format the response in aesthetic HTML with clear headings (<h2>), subheadings (<h3>), and lists (<ul>) where appropriate, but do NOT include any code blocks, markdown formatting, or backticks.` }
+                  { "role": "user", "content": `Give me a **concise** plant-related answer in Spanish to the question: "${q}". 
+                                                Do all reasoning **internally**, and **do not** include any thoughts, explanations, or chain-of-thought in the response. 
+                                                Format the response in aesthetic HTML with clear headings (<h2>), subheadings (<h3>), and lists (<ul>) where appropriate, 
+                                                but do **NOT** include any code blocks, markdown formatting, or backticks.` }
                 ],
               "top_p": 1,
               "temperature": 0.7
