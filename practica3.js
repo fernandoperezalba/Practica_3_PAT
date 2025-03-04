@@ -15,11 +15,13 @@ async function getPlant(q) {
           body: JSON.stringify({
               "model": "cognitivecomputations/dolphin3.0-r1-mistral-24b:free",
               "messages": [
-                  { "role": "user", "content": `Give me a **concise** plant-related answer in Spanish to the question: "${q}". 
-                                                Do all reasoning **internally**, and **do not** include any thoughts, explanations, or chain-of-thought in the response. 
-                                                Format the response in aesthetic HTML with clear headings (<h2>), subheadings (<h3>), and lists (<ul>) where appropriate, 
-                                                but do **NOT** include any code blocks, markdown formatting, or backticks.` }
-                ],
+                            { "role": "system", "content": `You are a friendly plant expert chatbot. 
+                                                            Always respond concisely in Spanish with plant-related information. 
+                                                            Do NOT include explanations, reasoning, or chain-of-thought—only the final, formatted HTML response.
+                                                            Use clear headings (<h2>), subheadings (<h3>), and lists (<ul>) where appropriate.
+                                                            Never use markdown, code blocks, backticks, or any additional commentary.` },
+                            { "role": "user", "content": `Give me a concise plant-related answer in Spanish to the question: "${q}".` }
+                        ],
               "top_p": 1,
               "temperature": 0.7
           })
