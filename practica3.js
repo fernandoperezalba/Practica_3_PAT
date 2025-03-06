@@ -36,22 +36,31 @@ async function getPlant(q) {
           })
       });
 
-      if (!response.ok) {
-          throw new Error(`API request failed with status ${response.status}`);
-      }
+          if (!response.ok) {
+              throw new Error(`API request failed with status ${response.status}`);
+          }
+          
+          const json = await response.json();
+          console.log("API Response:", json);
+          
+          if (json.choices && json.choices.length > 0) {
+              let plantInfo = json.choices[0].message.content; 
+              plantInfo = plantInfo.replace(/^```html\s*/, "");
+              plantInfo = plantInfo.replace(/```$/, "");
+          
+              // Filter everything before the keyword "Response:"
+              const keyword = "Response:";
+              const idx = plantInfo.indexOf(keyword);
+              if (idx !== -1) {
+                  plantInfo = plantInfo.slice(idx + keyword.length).trim();
+              }
+              
+              // Displaying the response
+              document.getElementById("output").innerHTML = plantInfo;
+          } else {
+              document.getElementById("output").innerHTML = "No se encontraron resultados.";
+          }
 
-      const json = await response.json();
-      console.log("API Response:", json);
-
-      if (json.choices && json.choices.length > 0) {
-          let plantInfo = json.choices[0].message.content; 
-          plantInfo = plantInfo.replace(/^```html\s*/, "");
-          plantInfo = plantInfo.replace(/```$/, "");
-          // Displaying the response
-          document.getElementById("output").innerHTML = plantInfo;
-      } else {
-          document.getElementById("output").innerHTML = "No se encontraron resultados.";
-      }
 
   } catch (error) {
       console.error("Error en la solicitud:", error);
