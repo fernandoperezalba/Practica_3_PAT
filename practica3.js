@@ -1,5 +1,5 @@
 const part1 = "sk";
-const part2 = "-or-v1-c78e0d085066450011e45847e308179dad0a565ba43788b3d17d91d5033843b5"
+const part2 = "-or-v1-8317354d4556d1340e5e802503d667435f3b74d6213ac76d3d27d644ab399296"
 const apiKey = part1 + part2;
 
 async function getPlant(q) {
@@ -13,7 +13,7 @@ async function getPlant(q) {
               "Content-Type": "application/json",
           },
           body: JSON.stringify({
-              "model": "cognitivecomputations/dolphin3.0-r1-mistral-24b:free",
+              "model": "qwen/qwq-32b:free",
               "messages": [
                             { 
                                 "role": "system", 
