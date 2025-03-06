@@ -15,12 +15,21 @@ async function getPlant(q) {
           body: JSON.stringify({
               "model": "cognitivecomputations/dolphin3.0-r1-mistral-24b:free",
               "messages": [
-                            { "role": "system", "content": `You are a friendly plant expert chatbot. 
-                                                            Always respond concisely in Spanish with plant-related information. 
-                                                            Do NOT include explanations, reasoning, or chain-of-thought—only the final, formatted HTML response.
-                                                            Use clear headings (<h2>), subheadings (<h3>), and lists (<ul>) where appropriate.
-                                                            Never use markdown, code blocks, backticks, or any additional commentary. Always respond with final HTML only.` },
-                            { "role": "user", "content": `Give me a concise plant-related answer in Spanish to the question: "${q}". Format with <h2>, <h3>, <ul>, <li>, but do NOT include any code blocks, backticks, or reasoning. ` }
+                            { 
+                                "role": "system", 
+                                "content": `You are a friendly plant expert chatbot. 
+                                            Always respond concisely in Spanish with plant-related information. 
+                                            Do NOT include explanations, reasoning, or chain-of-thought—only the final, formatted HTML response.
+                                            Use clear headings (<h2>), subheadings (<h3>), and lists (<ul>) where appropriate.
+                                            Never use markdown, code blocks, backticks, or any additional commentary. 
+                                            Always start your response with the word "Response:" followed by the HTML content.` 
+                            },
+                            { 
+                                "role": "user", 
+                                "content": `Give me a concise plant-related answer in Spanish to the question: "${q}". 
+                                            Format with <h2>, <h3>, <ul>, <li>, but do NOT include any code blocks, backticks, or reasoning.
+                                            Your response must begin with "Response:" followed immediately by the formatted HTML.` 
+                            }
                         ],
               "top_p": 1,
               "temperature": 0.7
