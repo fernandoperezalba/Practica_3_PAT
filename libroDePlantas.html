@@ -60,13 +60,14 @@
     <div class="container" id="busqueda">
         <div class="row">
             <div class="col-sm">
-                <form>
+                <form onsubmit="event.preventDefault(); getPlant(document.getElementById('Planta').value)">
                     <div class="input-group">
                         <span class="input-group-text">Pregunta aquí => </span>
                         <input type="text" aria-label="Pregunta aquí" id="Planta" placeholder="Pregunta aquí" class="form-control">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="getPlant(document.getElementById('Planta').value)">Buscar</button>
                     </div>
                 </form>
+
             </div>
         </div>
         <div class="row2" id="output"></div>
