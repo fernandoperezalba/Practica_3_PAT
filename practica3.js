@@ -26,7 +26,7 @@ async function getPlant(q) {
                             },
                             { 
                                 "role": "user", 
-                                "content": `Give me a concise plant-related answer in Spanish to the question: "${q}". 
+                                "content": `Give me a concise very friendly plant-related answer in Spanish with emojis to the question: "${q}". 
                                             Format with <h2>, <h3>, <ul>, <li>, but do NOT include any code blocks, backticks, or reasoning.
                                             Your response must begin with "Response:" followed immediately by the formatted HTML.` 
                             }
